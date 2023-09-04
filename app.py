@@ -6,6 +6,11 @@ SIGN_UP = './sign_up.html'
 
 
 @app.route('/')
+def bo():
+    return "hello hopey!"
+
+
+@app.route('/sign_up')
 def yo():
     return render_template(SIGN_UP, name='NIKHIL')
 
