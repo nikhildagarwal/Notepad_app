@@ -1,10 +1,13 @@
 import sqlite3
 
+EMAIL = 0
+PASSWORD = 1
+
 
 class FetchUser:
 
-    def __init__(self,email,password):
-        connection = sqlite3.connect('../infinote.db')
+    def __init__(self, email, password):
+        connection = sqlite3.connect('infinote.db')
         cursor = connection.cursor()
         cursor.execute('''CREATE TABLE IF NOT EXISTS users 
                         (id INTEGER PRIMARY KEY, name TEXT, email TEXT, password TEXT)''')
@@ -13,7 +16,7 @@ class FetchUser:
         if len(rows) == 0:
             self.name = None
             self.email = None
-            self.error = "*email is not linked to any account"
+            self.error = EMAIL
         else:
             row = rows[0]
             if row[3] == password:
@@ -23,6 +26,5 @@ class FetchUser:
             else:
                 self.name = None
                 self.email = None
-                self.error = "*password is incorrect"
+                self.error = PASSWORD
         connection.close()
-

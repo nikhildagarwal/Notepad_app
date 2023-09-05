@@ -9,19 +9,26 @@
 </head>
 <body>
     <div class="container">
-        <form class="login-form">
+        <form class="login-form" method="POST" action="/login">
             <img id="logo_image" src="../static/infinote_logo_trimmed.jpg" alt="A beautiful image">
             <h2>Login</h2>
             <div class="input-container">
                 <label for="email">Email</label>
-                <input type="text" id="email" name="email" required>
+                <input value="{{pre_email}}" type="text" id="email" name="email" required>
             </div>
+
             <div class="input-container">
                 <label for="password">Password</label>
-                <input type="password" id="password" name="password" required>
+                <input value="{{pre_pass}}" type="password" id="password" name="password" required>
             </div>
-            <button type="submit">Login</button>
+            <button class="submit-btn">Login</button>
             <p>Don't have an account? <a href="./sign_up">Sign up</a></p>
+            <div class = "error">
+                {{e_message}}
+            </div>
+            <div class = "error">
+                {{p_message}}
+            </div>
         </form>
     </div>
 </body>

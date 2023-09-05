@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='sign_up.css') }}">
+    <link rel="icon" href="{{ url_for('static', filename ='favicon.ico')}}">
+    <title>Logout</title>
+</head>
+<body>
+    <div class="container">
+        <form class="signup-form">
+            <img id="logo_image" src="../static/infinote_logo_trimmed.jpg" alt="A beautiful image">
+            <h2>Logged Out</h2>
+            <div class="text">
+                You have been logged out successfully!
+            </div>
+            <p>Ready to log back in? <a href="./login">Log in</a></p>
+        </form>
+    </div>
+</body>
+</html>

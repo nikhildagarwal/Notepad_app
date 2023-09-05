@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='after.css') }}">
+    <link rel="icon" href="{{ url_for('static', filename ='favicon.ico')}}">
+    <title>Home</title>
+</head>
+<body>
+    <div class="container">
+        <div class="logo-title">
+
+
+            <div class = "welcome">
+                <img id="logo_image" src="../static/infinote_logo.jpg" alt="A beautiful image">
+            </div>
+            <div class = "home-title">
+                <div class="txt">HOME</div>
+                <div class="sub-txt">Welcome {{name}}</div>
+            </div>
+        </div>
+        <div class = "directory">
+            <div class = "welcome">
+                <p><a href="./home">Profile Info</a></p>
+                <p><a href="./logout">Log Out</a></p>
+            </div>
+            <div class = "buttons">
+
+            </div>
+        </div>
+    </div>
+</body>
+</html>
