@@ -4,7 +4,7 @@ import sqlite3
 class AddUser:
 
     def __init__(self, name, email, password):
-        connection = sqlite3.connect('../infinote.db')
+        connection = sqlite3.connect('infinote.db')
         cursor = connection.cursor()
         cursor.execute('''CREATE TABLE IF NOT EXISTS users 
                         (id INTEGER PRIMARY KEY, name TEXT, email TEXT, password TEXT)''')

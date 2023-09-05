@@ -7,7 +7,7 @@ conn = sqlite3.connect('infinote.db')
 cursor = conn.cursor()
 
 # Create a table
-cursor.execute('''CREATE TABLE IF NOT EXISTS users (id INTEGER PRIMARY KEY, name TEXT, email TEXT)''')
+
 cursor.execute("SELECT * FROM users")
 rows = cursor.fetchall()
 

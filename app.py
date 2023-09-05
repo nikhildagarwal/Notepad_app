@@ -1,4 +1,4 @@
-from flask import Flask, render_template, session, request
+from flask import Flask, render_template, session, request, redirect, url_for
 from scripts import add_user
 
 app = Flask(__name__, template_folder='html')
@@ -15,7 +15,12 @@ def no_url():
 
 @app.route('/home')
 def home():
-    return "home"
+    try:
+        email = session['email']
+        name = session['name']
+        return f'hi {name}!'
+    except KeyError:
+        return redirect(url_for('sign_up'))
 
 
 @app.route('/sign_up')
@@ -25,14 +30,21 @@ def sign_up():
 
 @app.route('/sign_up', methods=['GET', 'POST'])
 def sign_up_post():
-    name = request.form.get('name')
+    n = request.form.get('first_name')
     email = request.form.get('email')
     password = request.form.get('password')
     confirm_password = request.form.get('confirm-password')
     if confirm_password != password:
-        return render_template(SIGN_UP)
+        return render_template(SIGN_UP, FIRST_NAME=n, EMAIL=email)
     else:
-        return "hi hopey"
+        au = add_user.AddUser(str(n), str(email), str(password))
+        print(str(au.done))
+        if au.done:
+            session['name'] = n
+            session['email'] = email
+            return redirect(url_for("home"))
+        else:
+            return render_template(SIGN_UP)
 
 
 @app.route('/login')
