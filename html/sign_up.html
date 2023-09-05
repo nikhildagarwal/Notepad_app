@@ -9,7 +9,7 @@
 </head>
 <body>
     <div class="container">
-        <form class="signup-form">
+        <form class="signup-form" method="POST" action="/sign_up">
             <img id="logo_image" src="../static/infinote_logo_trimmed.jpg" alt="A beautiful image">
             <h2>Sign Up</h2>
             <div class="input-container">
@@ -28,7 +28,7 @@
                 <label for="confirm-password">Confirm Password</label>
                 <input type="password" id="confirm-password" name="confirm-password" required>
             </div>
-            <button type="submit">Sign Up</button>
+            <button class="submit-btn">Sign Up</button>
             <p>Already have an account? <a href="./login">Log in</a></p>
         </form>
     </div>

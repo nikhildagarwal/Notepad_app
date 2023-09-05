@@ -61,7 +61,7 @@ font-family: Comfortaa, sans-serif;
     border-radius: 3px;
 }
 
-button[type="submit"] {
+.submit-btn {
     background-color: #333;
     color: #fff;
     border: none;
@@ -72,7 +72,7 @@ button[type="submit"] {
     font-family: Comfortaa, sans-serif;
 }
 
-button[type="submit"]:hover {
+.submit-btn:hover {
     background-color: #5b05cc;
     transition: ease-in-out 0.2s;
 }

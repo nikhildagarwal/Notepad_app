@@ -1,4 +1,4 @@
-from flask import Flask, render_template, session
+from flask import Flask, render_template, session, request
 from scripts import add_user
 
 app = Flask(__name__, template_folder='html')
@@ -21,6 +21,18 @@ def home():
 @app.route('/sign_up')
 def sign_up():
     return render_template(SIGN_UP)
+
+
+@app.route('/sign_up', methods=['GET', 'POST'])
+def sign_up_post():
+    name = request.form.get('name')
+    email = request.form.get('email')
+    password = request.form.get('password')
+    confirm_password = request.form.get('confirm-password')
+    if confirm_password != password:
+        return render_template(SIGN_UP)
+    else:
+        return "hi hopey"
 
 
 @app.route('/login')
