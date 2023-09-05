@@ -16,6 +16,3 @@ class AddUser:
         else:
             self.done = False
         connection.close()
-
-
-AddUser("nikhil", "email.nikhil.agarwal@gmail.com", "hi123")
