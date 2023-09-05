@@ -5,31 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{ url_for('static', filename='sign_up.css') }}">
     <link rel="icon" href="{{ url_for('static', filename ='favicon.ico')}}">
-    <title>Sign Up</title>
+    <title>Login</title>
 </head>
 <body>
     <div class="container">
-        <form class="signup-form">
+        <form class="login-form">
             <img id="logo_image" src="../static/infinote_logo_trimmed.jpg" alt="A beautiful image">
-            <h2>Sign Up</h2>
-            <div class="input-container">
-                <label for="first_name">First Name</label>
-                <input type="text" id="first_name" name="first_name" required>
-            </div>
+            <h2>Login</h2>
             <div class="input-container">
                 <label for="email">Email</label>
-                <input type="email" id="email" name="email" required>
+                <input type="text" id="email" name="email" required>
             </div>
             <div class="input-container">
                 <label for="password">Password</label>
                 <input type="password" id="password" name="password" required>
             </div>
-            <div class="input-container">
-                <label for="confirm-password">Confirm Password</label>
-                <input type="password" id="confirm-password" name="confirm-password" required>
-            </div>
-            <button type="submit">Sign Up</button>
-            <p>Already have an account? <a href="./login">Log in</a></p>
+            <button type="submit">Login</button>
+            <p>Don't have an account? <a href="./sign_up">Sign up</a></p>
         </form>
     </div>
 </body>
