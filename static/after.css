@@ -9,8 +9,8 @@ body {
 }
 
 #logo_image{
-    max-height:85px;
-    max-width:85px;
+    max-height:110px;
+    max-width:110px;
 }
 
 #title{
@@ -74,13 +74,13 @@ body {
 .txt{
     font-weight:bold;
     color:#434343;
-    font-size:40px;
+    font-size:30px;
 }
 
 .sub-txt{
     margin-top:10px;
     color:#434343;
-    font-size:20px;
+    font-size:15px;
 }
 
 .home-title{
@@ -145,8 +145,14 @@ font-family: Comfortaa, sans-serif;
 }
 
 p {
-    margin-left:10px;
+    margin-left:22px;
     margin-top: 6px;
+    font-size: 14px;
+}
+
+#help_button{
+    margin-left:22px;
+    margin-top: 33px;
     font-size: 14px;
 }
 
