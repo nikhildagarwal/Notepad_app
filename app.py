@@ -24,7 +24,7 @@ def home():
     try:
         email = session['email']
         name = session['name']
-        return render_template(HOME,name=name)
+        return render_template(HOME, name=name)
     except KeyError:
         return redirect(url_for('login'))
 
