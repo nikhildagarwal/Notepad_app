@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='sign_up.css') }}">
+    <link rel="icon" href="{{ url_for('static', filename ='favicon.ico')}}">
+    <title>Code</title>
+</head>
+<body>
+    <div class="container">
+        <form class="signup-form">
+            <img id="logo_image" src="../static/infinote_logo_trimmed.jpg" alt="A beautiful image">
+            <h2>Verification</h2>
+            <div class="text">
+                Thank you for signing up with Infinote!
+            </div>
+            <div class="filler"></div>
+            <div class="text">
+                Your 6-digit verification code is:
+            </div>
+            <div class="code">
+                <h7>{{d1}}</h7><h8>{{d2}}</h8><h9>{{d3}}</h9><h10>{{d4}}</h10><h11>{{d5}}</h11><h12>{{d6}}</h12>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

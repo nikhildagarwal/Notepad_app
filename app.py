@@ -1,6 +1,5 @@
 from flask import Flask, render_template, session, request, redirect, url_for
-from scripts import add_user
-from scripts import fetch_user
+from scripts import add_user, fetch_user, send_mail
 
 app = Flask(__name__, template_folder='html')
 app.secret_key = 'fga738sfl8w9jJk824ISFafh0980h4tsg093ASFoiughasdg'
@@ -43,7 +42,7 @@ def sign_up_post():
     if confirm_password != password:
         return render_template(SIGN_UP, FIRST_NAME=n, EMAIL=email, message="passwords provided do not match")
     else:
-        au = add_user.AddUser(str(n), str(email), str(password))
+        au = add_user.AddUser(str(n), str(email), str(password), "")
         print(str(au.done))
         if au.done:
             session['name'] = n
@@ -81,5 +80,14 @@ def logout():
     return render_template(LOGOUT)
 
 
+@app.route('/vex')
+def v():
+    mailer = send_mail.Mailer(app)
+    return mailer.send_verification_code('vc','infinote.app.adteam@gmail.com',['email.nikhil.agarwal@gmail.com'])
+
+
 if __name__ == "__main__":
     app.run(debug=True)
+
+
+

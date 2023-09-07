@@ -33,9 +33,13 @@ body {
     text-align: center;
 }
 
-h2 {
-    color: #333;
-}
+h2 {color: #333;}
+h7{color:#00b8b0;font-size:37px;margin-left:5px;margin-right:5px;}
+h8{color:#00a1a3;font-size:37px;margin-left:5px;margin-right:5px;}
+h9{color:#00b8b0;font-size:37px;margin-left:5px;margin-right:5px;}
+h10{color:#00dcb1;font-size:37px;margin-left:5px;margin-right:5px;}
+h11{color:#01d4a2;font-size:37px;margin-left:5px;margin-right:5px;}
+h12{color:#02b479;font-size:37px;margin-left:5px;margin-right:5px;}
 
 .input-container {
     font-family: Comfortaa, sans-serif;
@@ -96,4 +100,20 @@ a:hover {
     margin-top:0px;
     font-size:13px;
     color:#eb272a;
+}
+
+.filler{
+    height:20px;
+}
+
+.code{
+    font-size:30px;
+    font-weight:bold;
+    color: #333;
+    margin-top:40px;
+    outline: 2px solid grey;
+    padding:20px;
+    margin-right:80px;
+    margin-left:80px;
+    border-radius:20px;
 }
