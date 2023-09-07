@@ -5,29 +5,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{ url_for('static', filename='sign_up.css') }}">
     <link rel="icon" href="{{ url_for('static', filename ='favicon.ico')}}">
-    <title>Login</title>
+    <title>Password Reset</title>
 </head>
 <body>
     <div class="container">
-        <form class="login-form" method="POST" action="/login">
+        <form class="login-form" method="POST" action="/verification/password">
             <img id="logo_image" src="../static/infinote_logo_trimmed.jpg" alt="A beautiful image">
-            <h2>Login</h2>
+            <h2>Password Reset</h2>
+            <div class="text">
+                Please enter your email
+            </div>
             <div class="input-container">
                 <label for="email">Email</label>
                 <input value="{{pre_email}}" type="email" id="email" name="email" required>
             </div>
+            <button class="submit-btn">Confirm</button>
+            <div class="filler">
 
-            <div class="input-container">
-                <label for="password">Password<a id="pr" href="./confirm/email">forgot password?</a></label>
-                <input value="{{pre_pass}}" type="password" id="password" name="password" required>
-            </div>
-            <button class="submit-btn">Login</button>
-            <p>Don't have an account? <a href="./sign_up">Sign up</a></p>
-            <div class = "error">
-                {{e_message}}
             </div>
             <div class = "error">
-                {{p_message}}
+                {{error_message}}
             </div>
         </form>
     </div>

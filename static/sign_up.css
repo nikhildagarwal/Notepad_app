@@ -88,13 +88,15 @@ p {
 }
 
 a {
-    color: #333;
+    color: #01d4a2;
     text-decoration: none;
+    transition:0.2s ease-in-out;
 }
 
 a:hover {
     text-decoration: underline;
-    color: #223fe6;
+    color: #00b4c9;
+    transition:0.2s ease-in-out;
 }
 
 .error{
@@ -145,4 +147,9 @@ display:none;}
     text-align:center;
     font-size:25px;
     margin-bottom:5px;
+}
+
+#pr{
+    margin-left:202px;
+    font-size:11px;
 }
