@@ -6,6 +6,7 @@ body {
     margin: 0;
     padding: 0;
     max-height:100%;
+    text-align:center;
 }
 
 #logo_image{
@@ -116,4 +117,32 @@ a:hover {
     margin-right:80px;
     margin-left:80px;
     border-radius:20px;
+}
+
+.verification-container {
+    justify-content: space-between;
+    width: 200px;
+    text-align:center;
+    margin-left:100px;
+    margin-top:20px;
+}
+
+.verification-input {
+    width: 30px;
+    height: 30px;
+    font-size: 18px;
+    text-align: center;
+    border: 2px solid #ccc;
+    padding:10px;
+    border-radius: 15px;
+    margin-bottom:10px;
+}
+
+.no-label{
+display:none;}
+
+.vc_input{
+    text-align:center;
+    font-size:25px;
+    margin-bottom:5px;
 }

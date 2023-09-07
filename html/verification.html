@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='sign_up.css') }}">
+    <link rel="icon" href="{{ url_for('static', filename ='favicon.ico')}}">
+    <title>Code</title>
+</head>
+<body>
+    <div class="container">
+        <form class="signup-form" method="POST" action="/verification">
+            <img id="logo_image" src="../static/infinote_logo_trimmed.jpg" alt="A beautiful image">
+            <h2>Verification</h2>
+            <div class="text">
+                We just sent a verification code to your email!
+            </div>
+            <div class="filler"></div>
+            <div class="text">
+                Enter your 6-digit verification code:
+            </div>
+            <div class="verification-container">
+                <label class="no-label" for="vc">First Name</label>
+                <input class="vc_input" type="text" id="vc" name="vc" maxlength="6" required>
+            </div>
+            <button class="submit-btn">Verify</button>
+            <div class="filler"></div>
+            <div class = "error">
+                {{message}}
+            </div>
+        </form>
+
+    </div>
+</body>
+</html>

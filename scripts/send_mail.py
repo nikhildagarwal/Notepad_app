@@ -12,7 +12,7 @@ class Mailer:
         app.config['MAIL_USE_TLS'] = True
         app.config['MAIL_USE_SSL'] = False
         app.config['MAIL_USERNAME'] = 'infinote.app.adteam@gmail.com'
-        app.config['MAIL_PASSWORD'] = 'inf1928374'
+        app.config['MAIL_PASSWORD'] = 'rvnudnxenpxsynoi'
         self.mail = Mail(app)
         self.code = []
 
