@@ -1,5 +1,7 @@
 import sqlite3
 
+import scripts.update_user
+
 # Connect to the database
 conn = sqlite3.connect('infinote.db')
 
@@ -15,3 +17,4 @@ for row in rows:
     print(row)
 
 conn.close()
+

@@ -1,10 +1,12 @@
 from flask import Flask, render_template, session, request, redirect, url_for
-from scripts import add_user, fetch_user, send_mail, check_user
+from scripts import add_user, fetch_user, send_mail, check_user, update_user
 
 app = Flask(__name__, template_folder='html')
 app.secret_key = 'fga738sfl8w9jJk824ISFafh0980h4tsg093ASFoiughasdg'
 EMAIL = fetch_user.EMAIL
 PASSWORD = fetch_user.PASSWORD
+GO = 1
+NO_GO = 0
 
 SIGN_UP = './sign_up.html'
 LOGIN = './login.html'
@@ -12,6 +14,7 @@ LOGOUT = './logout.html'
 HOME = './home.html'
 VERIFICATION = './verification.html'
 CONFIRM_EMAIL = './email.html'
+RESET_PASSWORD = './double_password.html'
 
 
 @app.route('/')
@@ -46,6 +49,7 @@ def verification_check():
     verification_code = request.form.get('vc')
     if path_from == "password-reset":
         if str(verification_code) == session['password-reset-code']:
+            session['signal'] = GO
             return redirect(url_for('reset_password'))
         else:
             session['fr'] = 'password-reset'
@@ -129,7 +133,29 @@ def confirm_email():
 
 @app.route('/reset/password')
 def reset_password():
-    return "developing"
+    try:
+        if session['signal'] == GO:
+            return render_template(RESET_PASSWORD)
+        else:
+            return redirect(url_for('login'))
+    except KeyError:
+        return redirect(url_for('login'))
+
+
+@app.route('/reset/password',methods=["POST"])
+def reset_password_submit():
+    email = session['sensitive_data'][0]
+    password = request.form.get('password')
+    confirm_password = request.form.get('confirm-password')
+    if confirm_password != password:
+        return render_template(RESET_PASSWORD, message="passwords provided do not match")
+    else:
+        uu = update_user.UpdateUser(email)
+        uu.update_password(password)
+        session.clear()
+        session['email'] = email
+        session['name'] = uu.name
+        return redirect(url_for('home'))
 
 
 @app.route('/verification/password', methods=['POST'])
