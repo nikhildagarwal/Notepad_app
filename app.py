@@ -41,6 +41,33 @@ def sign_up():
 @app.route('/verification')
 def verification():
     return render_template(VERIFICATION)
+    try:
+        sig = session['signal']
+        if sig == GO:
+            return render_template(VERIFICATION)
+        else:
+            return redirect(url_for('login'))
+    except KeyError:
+        return redirect(url_for('login'))
+
+
+@app.route('/resend/code')
+def resend_code():
+    try:
+        sd = session['sensitive_data']
+        sc = send_mail.Mailer(app)
+        sc.send_verification_code('Resend Code - Infinote','infinote.app.adteam@gmail.com',
+                                  [sd[0]],'Your valid code has been resent')
+        code = ""
+        for num in sc.code:
+            code += str(num)
+        if session['fr'] == 'sign-up':
+            session['verification_code'] = code
+        else:
+            session['password-reset-code'] = code
+        return redirect(url_for('verification'))
+    except KeyError:
+        return redirect(url_for('login'))
 
 
 @app.route('/verification', methods=['POST'])
@@ -56,8 +83,8 @@ def verification_check():
             return render_template(VERIFICATION,message="invalid code")
     elif path_from == "sign-up":
         if str(verification_code) == session['verification_code']:
-            email = session['sensitive_data'][1]
-            name = session['sensitive_data'][0]
+            email = session['sensitive_data'][0]
+            name = session['sensitive_data'][1]
             password = session['sensitive_data'][2]
             session.clear()
             au = add_user.AddUser(str(name), str(email), str(password), "")
@@ -93,8 +120,9 @@ def sign_up_post():
             for num in mailer.code:
                 string_code += str(num)
             session['verification_code'] = string_code
-            session['sensitive_data'] = [str(n), str(email), str(password)]
+            session['sensitive_data'] = [str(email), str(n), str(password)]
             session['fr'] = 'sign-up'
+            session['signal'] = GO
             return redirect(url_for('verification'))
 
 
@@ -173,6 +201,7 @@ def verify_code_for_password():
         session['password-reset-code'] = string_code
         session['sensitive_data'] = [str(email)]
         session['fr'] = "password-reset"
+        session['signal'] = GO
         return redirect(url_for('verification'))
     else:
         return render_template(CONFIRM_EMAIL,error_message="Account does not exist")
