@@ -40,7 +40,6 @@ def sign_up():
 
 @app.route('/verification')
 def verification():
-    return render_template(VERIFICATION)
     try:
         sig = session['signal']
         if sig == GO:
