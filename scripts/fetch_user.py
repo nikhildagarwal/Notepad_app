@@ -10,7 +10,7 @@ class FetchUser:
         connection = sqlite3.connect('infinote.db')
         cursor = connection.cursor()
         cursor.execute('''CREATE TABLE IF NOT EXISTS users 
-                        (id INTEGER PRIMARY KEY, name TEXT, email TEXT, password TEXT, phone TEXT)''')
+                        (user_id INTEGER PRIMARY KEY, name TEXT, email TEXT, password TEXT, phone TEXT)''')
         cursor.execute("SELECT * FROM users WHERE email = ?", (email,))
         rows = cursor.fetchall()
         if len(rows) == 0:
