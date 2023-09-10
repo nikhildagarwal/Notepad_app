@@ -15,7 +15,6 @@ class UpdateUser:
         connection.close()
 
     def update_password(self,password):
-        p = str(password)
         connection = sqlite3.connect('infinote.db')
         cursor = connection.cursor()
         cursor.execute('''CREATE TABLE IF NOT EXISTS users 
