@@ -15,6 +15,7 @@ HOME = './home.html'
 VERIFICATION = './verification.html'
 CONFIRM_EMAIL = './email.html'
 RESET_PASSWORD = './double_password.html'
+NOTES = './notes.html'
 
 
 @app.route('/')
@@ -204,6 +205,16 @@ def verify_code_for_password():
         return redirect(url_for('verification'))
     else:
         return render_template(CONFIRM_EMAIL,error_message="Account does not exist")
+
+
+@app.route('/notes')
+def notes():
+    try:
+        email = session['email']
+        name = session['name']
+        return render_template(NOTES)
+    except KeyError:
+        return redirect(url_for('login'))
 
 
 if __name__ == "__main__":
