@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{ url_for('static', filename='after.css') }}">
     <link rel="icon" href="{{ url_for('static', filename ='favicon.ico')}}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <title>Home</title>
 </head>
 <body>
@@ -21,14 +22,29 @@
                 <!--<div class="sub-txt">Welcome, {{name}}!</div>-->
             </div>
         </div>
-        <div class = "directory">
-            <div class = "welcome">
+        <div class="directory">
+            <div class="welcome">
                 <p><a href="./profile">Profile Info</a></p>
                 <p><a href="./logout">Log Out</a></p>
                 <p id="help_button"><a href="./help">Help</a></p>
             </div>
-            <div class = "buttons">
-
+            <div class="buttons">
+                <a href="./notes">
+                    <div class="button">
+                        <i id="notepad-icon" class="fa-regular fa-note-sticky"></i>
+                        <div class="sub-txt">
+                            Notes
+                        </div>
+                    </div>
+                </a>
+                <a href="./calendar">
+                    <div class="button">
+                        <i id="calendar-icon" class="fa-regular fa-calendar"></i>
+                        <div class="sub-txt">
+                            Calendar
+                        </div>
+                    </div>
+                </a>
             </div>
         </div>
     </div>

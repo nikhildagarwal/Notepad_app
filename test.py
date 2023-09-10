@@ -10,3 +10,8 @@ rows = cursor.fetchall()
 for row in rows:
     print(row)
 
+cursor.execute('SELECT * FROM users')
+rows = cursor.fetchall()
+for row in rows:
+    print(row)
+
