@@ -1,5 +1,7 @@
 import sqlite3
 
+from scripts import my_crypt
+
 EMAIL = 0
 PASSWORD = 1
 
@@ -19,7 +21,9 @@ class FetchUser:
             self.error = EMAIL
         else:
             row = rows[0]
-            if row[3] == password:
+            c = my_crypt.MyCrypt(row[3],email)
+            c.decrypt()
+            if c.output == password:
                 self.name = row[1]
                 self.email = row[2]
                 self.error = None

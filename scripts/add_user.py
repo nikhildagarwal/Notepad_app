@@ -1,5 +1,7 @@
 import sqlite3
 
+from scripts import my_crypt
+
 
 class AddUser:
 
@@ -10,8 +12,10 @@ class AddUser:
                         (user_id INTEGER PRIMARY KEY, name TEXT, email TEXT, password TEXT, phone TEXT)''')
         cursor.execute("SELECT * FROM users WHERE email = ?", (email,))
         if len(cursor.fetchall()) == 0:
+            c = my_crypt.MyCrypt(password,email)
+            c.encrypt()
             cursor.execute("INSERT INTO users (name, email, password, phone) VALUES (?, ?, ?, ?)",
-                           (name, email, password, phone))
+                           (name, email, c.output, phone))
             connection.commit()
             self.done = True
         else:

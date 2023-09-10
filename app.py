@@ -7,6 +7,7 @@ EMAIL = fetch_user.EMAIL
 PASSWORD = fetch_user.PASSWORD
 GO = 1
 NO_GO = 0
+RESTRICTED_CHARS = {'{','}','|','~'}
 
 SIGN_UP = './sign_up.html'
 LOGIN = './login.html'
@@ -104,6 +105,13 @@ def sign_up_post():
     n = request.form.get('first_name')
     email = request.form.get('email')
     password = request.form.get('password')
+    signal = False
+    for char in password:
+        if char in RESTRICTED_CHARS:
+            signal = True
+            break
+    if signal:
+        return render_template(SIGN_UP, FIRST_NAME=n, EMAIL=email, message="password cannot contain characters ~ } | {")
     confirm_password = request.form.get('confirm-password')
     if confirm_password != password:
         return render_template(SIGN_UP, FIRST_NAME=n, EMAIL=email, message="passwords provided do not match")
