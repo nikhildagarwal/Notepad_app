@@ -1,5 +1,5 @@
 from flask import Flask, render_template, session, request, redirect, url_for
-from scripts import add_user, fetch_user, send_mail, check_user, update_user
+from scripts import add_user, fetch_user, send_mail, check_user, update_user, create_note, fetch_notes
 
 app = Flask(__name__, template_folder='html')
 app.secret_key = 'fga738sfl8w9jJk824ISFafh0980h4tsg093ASFoiughasdg'
@@ -7,7 +7,7 @@ EMAIL = fetch_user.EMAIL
 PASSWORD = fetch_user.PASSWORD
 GO = 1
 NO_GO = 0
-RESTRICTED_CHARS = {'{','}','|','~'}
+RESTRICTED_CHARS = {'{', '}', '|', '~'}
 
 SIGN_UP = './sign_up.html'
 LOGIN = './login.html'
@@ -57,8 +57,8 @@ def resend_code():
     try:
         sd = session['sensitive_data']
         sc = send_mail.Mailer(app)
-        sc.send_verification_code('Resend Code - Infinote','infinote.app.adteam@gmail.com',
-                                  [sd[0]],'Your valid code has been resent')
+        sc.send_verification_code('Resend Code - Infinote', 'infinote.app.adteam@gmail.com',
+                                  [sd[0]], 'Your valid code has been resent')
         code = ""
         for num in sc.code:
             code += str(num)
@@ -81,7 +81,7 @@ def verification_check():
             return redirect(url_for('reset_password'))
         else:
             session['fr'] = 'password-reset'
-            return render_template(VERIFICATION,message="invalid code")
+            return render_template(VERIFICATION, message="invalid code")
     elif path_from == "sign-up":
         if str(verification_code) == session['verification_code']:
             email = session['sensitive_data'][0]
@@ -178,7 +178,7 @@ def reset_password():
         return redirect(url_for('login'))
 
 
-@app.route('/reset/password',methods=["POST"])
+@app.route('/reset/password', methods=["POST"])
 def reset_password_submit():
     email = session['sensitive_data'][0]
     password = request.form.get('password')
@@ -212,7 +212,7 @@ def verify_code_for_password():
         session['signal'] = GO
         return redirect(url_for('verification'))
     else:
-        return render_template(CONFIRM_EMAIL,error_message="Account does not exist")
+        return render_template(CONFIRM_EMAIL, error_message="Account does not exist")
 
 
 @app.route('/notes')
@@ -223,6 +223,22 @@ def notes():
         return render_template(NOTES)
     except KeyError:
         return redirect(url_for('login'))
+
+
+@app.route('/create-note', methods=["POST"])
+def note_add():
+    title = request.form.get('title')
+    note = request.form.get('note')
+    email = session['email']
+    cn = create_note.CreateNote(str(email),str(note),str(title))
+    if cn.error is None:
+        msg = ""
+        fn = fetch_notes.FetchNotes(email)
+        for row in fn.rows:
+            msg += str(row) + "\n"
+        return msg
+    else:
+        return render_template(NOTES)
 
 
 if __name__ == "__main__":
