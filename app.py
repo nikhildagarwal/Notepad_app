@@ -143,7 +143,7 @@ def login():
 def login_get():
     email = request.form.get('email')
     password = request.form.get('password')
-    fu = fetch_user.FetchUser(email, password)
+    fu = fetch_user.FetchUser(str(email), str(password))
     if fu.error is None:
         session['name'] = fu.name
         session['email'] = fu.email

@@ -1,5 +1,7 @@
 import sqlite3
 
+from scripts import my_crypt
+
 
 class UpdateUser:
 
@@ -17,9 +19,11 @@ class UpdateUser:
     def update_password(self,password):
         connection = sqlite3.connect('infinote.db')
         cursor = connection.cursor()
+        c = my_crypt.MyCrypt(password, self.email)
+        c.encrypt()
         cursor.execute('''CREATE TABLE IF NOT EXISTS users 
                                 (user_id INTEGER PRIMARY KEY, name TEXT, email TEXT, password TEXT, phone TEXT)''')
-        cursor.execute("UPDATE users SET password = ? WHERE email = ?",(password,self.email))
+        cursor.execute("UPDATE users SET password = ? WHERE email = ?",(c.output,self.email))
         connection.commit()
         connection.close()
 
