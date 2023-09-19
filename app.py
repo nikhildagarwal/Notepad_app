@@ -27,7 +27,6 @@ def no_url():
 @app.route('/home')
 def home():
     try:
-        print(session)
         email = session['email']
         name = session['name']
         return render_template(HOME, name=name)
@@ -227,18 +226,23 @@ def notes():
 
 @app.route('/create-note', methods=["POST"])
 def note_add():
-    title = request.form.get('title')
-    note = request.form.get('note')
-    email = session['email']
-    cn = create_note.CreateNote(str(email),str(note),str(title))
-    if cn.error is None:
-        msg = ""
-        fn = fetch_notes.FetchNotes(email)
-        for row in fn.rows:
-            msg += str(row) + "\n"
-        return msg
-    else:
-        return render_template(NOTES)
+    try:
+        title = request.form.get('title')
+        note = request.form.get('note')
+        email = session['email']
+        cn = create_note.CreateNote(str(email),str(note),str(title))
+        if cn.error is None:
+            return redirect(url_for('notes'))
+        else:
+            return render_template(NOTES)
+    except KeyError:
+        return redirect(url_for('login'))
+    
+    
+@app.route('/api/fetch_notes',methods=["GET"])
+def get_notes():
+    fn = fetch_notes.FetchNotes(session['email'])
+    return fn.rows
 
 
 if __name__ == "__main__":

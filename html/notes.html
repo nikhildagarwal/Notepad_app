@@ -23,19 +23,24 @@
         </form>
     </div>
     <div class="container">
-        <div class="notes-container">
-            <div class="grid-item">hi</div>
-            <div class="grid-item">hi</div>
-            <div class="grid-item">hi</div>
-            <div class="grid-item">hi</div>
-            <div class="grid-item">hi</div>
-            <div class="grid-item">hi</div>
-            <div class="grid-item">hi</div>
-            <div class="grid-item">hi</div>
-            <div class="grid-item">hi</div>
-            <div class="grid-item">hi</div>
+        <div class="notes-container" id="nc">
+            
         </div>
     </div>
+    <script>
+        window.onload = ()=>{
+            fetch('/api/fetch_notes',{
+                method:"GET",
+                cache:"no-cache"
+            }).then((response)=>{
+                response.json().then((result)=>{
+                    result.map((item)=>{
+                        document.getElementById("nc").innerHTML += `<div class="grid-item">${item[2]}</div>`
+                    })
+                })
+            })
+        }
+    </script>
 </body>
 </html>
 
