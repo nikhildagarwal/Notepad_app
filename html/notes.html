@@ -8,6 +8,7 @@
     <title>Notes</title>
 </head>
 <body>
+    
     <div class="notes-submit-container">
         <form class="notes-form" method="POST" action="/create-note">
             <img id="logo_image" src="../static/infinote_logo_trimmed.jpg" alt="A beautiful image">
@@ -27,7 +28,11 @@
             
         </div>
     </div>
+    
     <script>
+        var MESSAGE = 2;
+        var TITLE = 1;
+
         window.onload = ()=>{
             fetch('/api/fetch_notes',{
                 method:"GET",
@@ -35,12 +40,15 @@
             }).then((response)=>{
                 response.json().then((result)=>{
                     result.map((item)=>{
-                        document.getElementById("nc").innerHTML += `<div class="grid-item">${item[2]}</div>`
+                        document.getElementById("nc").innerHTML += `<div class="grid-item"><div class ="grid-item-title">${item[TITLE]}</div>${item[MESSAGE]}</div>`
                     })
                 })
             })
         }
     </script>
 </body>
+<div class="focused-note-off" id="fn">
+
+</div>
 </html>
 
