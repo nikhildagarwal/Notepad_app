@@ -17,6 +17,7 @@ VERIFICATION = './verification.html'
 CONFIRM_EMAIL = './email.html'
 RESET_PASSWORD = './double_password.html'
 NOTES = './notes.html'
+PASSWORDS = './passwords.html'
 
 
 @app.route('/')
@@ -243,6 +244,11 @@ def note_add():
 def get_notes():
     fn = fetch_notes.FetchNotes(session['email'])
     return fn.rows
+
+
+@app.route('/verify-access')
+def verify_access():
+    return render_template(PASSWORDS)
 
 
 if __name__ == "__main__":
