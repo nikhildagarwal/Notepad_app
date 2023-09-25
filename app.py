@@ -248,7 +248,20 @@ def get_notes():
 
 @app.route('/verify-access')
 def verify_access():
-    return render_template(PASSWORDS)
+    try:
+        email = session['email']
+        return render_template(PASSWORDS)
+    except KeyError:
+        return redirect(url_for('login'))
+
+
+@app.route('/encrypt-password',methods=["POST"])
+def encrypt_password():
+    email = session['email']
+    website = request.form.get('website')
+    user = request.form.get('user')
+    password = request.form.get('password')
+    return str([email,website,user,password])
 
 
 if __name__ == "__main__":

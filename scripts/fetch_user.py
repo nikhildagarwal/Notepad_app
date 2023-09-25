@@ -15,6 +15,7 @@ class FetchUser:
                         (user_id INTEGER PRIMARY KEY, name TEXT, email TEXT, password TEXT, phone TEXT)''')
         cursor.execute("SELECT * FROM users WHERE email = ?", (email,))
         rows = cursor.fetchall()
+        self.rows = rows
         if len(rows) == 0:
             self.name = None
             self.email = None

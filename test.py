@@ -1,9 +1,12 @@
 import sqlite3
 import scripts
-from scripts import create_note, add_user, update_note,fetch_notes
+from scripts import create_note, add_user, update_note,fetch_notes, fetch_user
 
-fn1 = fetch_notes.FetchNotes("email.nikhil.agarwal@gmail.com")
-for row in fn1.rows:
-    print(row)
+users = ['email.nikhil.agarwal@gmail.com','hopefunfun@gmail.com','nda49@scarletmail.rutgers.edu']
+
+for user in users:
+    fu = fetch_user.FetchUser(user,"")
+    print(str(fu.rows))
+
 
 
