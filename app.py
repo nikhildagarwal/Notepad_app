@@ -1,5 +1,5 @@
 from flask import Flask, render_template, session, request, redirect, url_for
-from scripts import add_user, fetch_user, send_mail, check_user, update_user, create_note, fetch_notes
+from scripts import add_user, fetch_user, send_mail, check_user, update_user, create_note, fetch_notes, add_password
 
 app = Flask(__name__, template_folder='html')
 app.secret_key = 'fga738sfl8w9jJk824ISFafh0980h4tsg093ASFoiughasdg'
@@ -261,7 +261,11 @@ def encrypt_password():
     website = request.form.get('website')
     user = request.form.get('user')
     password = request.form.get('password')
-    return str([email,website,user,password])
+    ap = add_password.AddPassword(email,website,user,password)
+    if ap.error is None:
+        return redirect(url_for('verify_access'))
+    else:
+        return render_template(PASSWORDS,error_message=ap.error)
 
 
 if __name__ == "__main__":

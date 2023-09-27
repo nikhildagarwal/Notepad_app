@@ -37,6 +37,12 @@ body {
     width:90%;`
 }
 
+.error{
+    margin-top:0px;
+    font-size:13px;
+    color:#eb272a;
+}
+
 .notes-submit-container{
     margin: 0 auto;
     width:90%;
