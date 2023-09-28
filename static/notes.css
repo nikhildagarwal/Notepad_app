@@ -30,7 +30,7 @@ h2{
     height:auto;
     margin-top:3%;
     margin-bottom:3%;
-    margin-left:5%;
+    margin-left:3%;
     margin-right:5%;
     padding: 20px;
     background-color: #fff;
@@ -67,7 +67,7 @@ h2{
 }
 
 .notes-submit-container{
-    margin-left:5%;
+    margin-left:3%;
     margin-right:5%;
     width:90%;
     height:75px;
@@ -279,3 +279,6 @@ a{
     border-radius: 5px;
 }
 
+.op{
+    padding:7.5px;
+}
