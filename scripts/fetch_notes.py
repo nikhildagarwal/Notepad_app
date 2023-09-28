@@ -12,6 +12,6 @@ class FetchNotes:
         cursor.execute("SELECT user_id FROM users WHERE email = ?", (email,))
         uid = cursor.fetchall()[0][0]
         cursor.execute("SELECT * FROM messages WHERE user_id = ?",(uid,))
-        rows = cursor.fetchall()
-        self.rows = rows
+        self.rows = cursor.fetchall()
+
 

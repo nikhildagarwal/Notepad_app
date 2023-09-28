@@ -1,5 +1,6 @@
 from flask import Flask, render_template, session, request, redirect, url_for
 from scripts import add_user, fetch_user, send_mail, check_user, update_user, create_note, fetch_notes, add_password
+from scripts import fetch_passwords
 
 app = Flask(__name__, template_folder='html')
 app.secret_key = 'fga738sfl8w9jJk824ISFafh0980h4tsg093ASFoiughasdg'
@@ -231,41 +232,61 @@ def note_add():
         title = request.form.get('title')
         note = request.form.get('note')
         email = session['email']
-        cn = create_note.CreateNote(str(email),str(note),str(title))
+        cn = create_note.CreateNote(str(email), str(note), str(title))
         if cn.error is None:
             return redirect(url_for('notes'))
         else:
             return render_template(NOTES)
     except KeyError:
         return redirect(url_for('login'))
-    
-    
-@app.route('/api/fetch_notes',methods=["GET"])
+
+
+@app.route('/api/fetch_notes', methods=["GET"])
 def get_notes():
     fn = fetch_notes.FetchNotes(session['email'])
     return fn.rows
+
+
+@app.route('/api/fetch_passwords', methods=["GET"])
+def get_passwords():
+    fp = fetch_passwords.FetchPasswords(session['email'])
+    return fp.rows
 
 
 @app.route('/verify-access')
 def verify_access():
     try:
         email = session['email']
-        return render_template(PASSWORDS)
+        session['verify-access'] = True
+        return redirect(url_for('passwords'))
     except KeyError:
         return redirect(url_for('login'))
 
 
-@app.route('/encrypt-password',methods=["POST"])
+@app.route('/passwords')
+def passwords():
+    try:
+        email = session['email']
+        try:
+            va = session['verify-access']
+            return render_template(PASSWORDS)
+        except KeyError:
+            return redirect(url_for('verify_access'))
+    except KeyError:
+        return redirect(url_for('login'))
+
+
+@app.route('/encrypt-password', methods=["POST"])
 def encrypt_password():
     email = session['email']
     website = request.form.get('website')
     user = request.form.get('user')
     password = request.form.get('password')
-    ap = add_password.AddPassword(email,website,user,password)
+    ap = add_password.AddPassword(email, website, user, password)
     if ap.error is None:
-        return redirect(url_for('verify_access'))
+        return redirect(url_for('passwords'))
     else:
-        return render_template(PASSWORDS,error_message=ap.error)
+        return render_template(PASSWORDS, error_message=ap.error)
 
 
 if __name__ == "__main__":
