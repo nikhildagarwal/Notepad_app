@@ -2,8 +2,6 @@ from flask import Flask, render_template, session, request, redirect, url_for
 from scripts import add_user, fetch_user, send_mail, check_user, update_user, create_note, fetch_notes, add_password
 from scripts import fetch_passwords
 
-#Hi akshat
-
 app = Flask(__name__, template_folder='html')
 app.secret_key = 'fga738sfl8w9jJk824ISFafh0980h4tsg093ASFoiughasdg'
 EMAIL = fetch_user.EMAIL
