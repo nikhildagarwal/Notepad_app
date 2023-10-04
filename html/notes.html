@@ -5,10 +5,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{ url_for('static', filename='notes.css') }}">
     <link rel="icon" href="{{ url_for('static', filename ='favicon.ico')}}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <title>Notes</title>
 </head>
+
 <body>
-    
+    <div class="cover" id="edit_note">
+        <div class="notes-edit-container">
+            <form class="notes-form-edit" method="POST" action="/create-note">
+                <i class="fa-solid fa-xmark" style="color: #2b2727;" id="note_back" title="cancel"></i>
+                <label for="email" id="email_label">Email:</label>
+                <input type="email" id="emaile" name="email" placeholder="Enter your email" required>
+
+                <label for="comments" id="comments_label">Comments:</label>
+                <textarea id="comments" name="comments" rows="7" placeholder="Enter your comments" required></textarea>
+
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+    </div>
     <div class="notes-submit-container">
         <form class="notes-form" method="POST" action="/create-note">
             <img id="logo_image" src="../static/infinote_logo_trimmed.jpg" alt="A beautiful image">
@@ -42,12 +57,21 @@
                     result.map((item)=>{
                         document.getElementById("nc").innerHTML += `<div class="grid-item"><div class ="grid-item-title">${item[TITLE]}</div>${item[MESSAGE]}</div>`
                     })
+                    document.querySelectorAll(".grid-item").forEach((button)=>{
+                        button.addEventListener('click',()=>{
+                            document.getElementById("edit_note").className = "cover_show";
+                        })
+                    })
                 })
             })
         }
 
         document.getElementById("logo_image").addEventListener('click',()=>{
             window.location.href="./home";
+        })
+
+        document.getElementById("note_back").addEventListener('click',()=>{
+            document.getElementById("edit_note").className = "cover";
         })
     </script>
 </body>

@@ -10,6 +10,24 @@ body {
     position: absolute;
 }
 
+.cover{
+    display:none;
+    z-index: 10;
+}
+
+.cover_show{
+    position: absolute;
+    display: block;
+    width: 100%;
+    height: 100%;
+    backdrop-filter: blur(8px);
+}
+
+.back-button{
+    font-size: 30px;
+    cursor: pointer;
+}
+
 #logo_image{
     max-height:120px;
     max-width:120px;
@@ -45,7 +63,7 @@ h2{
     display: grid;
     grid-template-columns: repeat(5, 20%);
     grid-gap: 20px;
-    z-index: 2;
+    z-index: 1;
     width:90%;
     height:auto;
 }
@@ -54,7 +72,7 @@ h2{
     display: inline-block;
     align-items: left;
     justify-content: left;
-    z-index: 2;
+    z-index: 1;
     width:90%;
     flex-direction: column;
     height:auto;
@@ -79,9 +97,26 @@ h2{
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
+.notes-edit-container{
+    margin-left:23.5%;
+    width:50%;
+    height:50%;
+    margin-top:10%;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
 .notes-form{
     display:flex;
     flex-direction:row;
+    align-items:center;
+}
+
+.notes-form-edit{
+    display:flex;
+    flex-direction:column;
     align-items:center;
 }
 
@@ -95,7 +130,6 @@ h2{
   width: 85%;
   transition:0.2s ease-in-out;
   margin-left:10px;
-  z-index:4;
 }
 
 .password-item {
@@ -165,6 +199,7 @@ h1{
 .grid-item:hover{
     transition:0.25s ease-in-out;
     background-color:#bf4ce7;
+    cursor:pointer;
 }
 
 .grid-item-title {
@@ -182,6 +217,20 @@ h1{
     font-family: Comfortaa, sans-serif;
     margin-left:25px;
     text-align: left;
+}
+
+.input-containere {
+    font-family: Comfortaa, sans-serif;
+    margin-left:25px;
+    text-align: left;
+    width: 50%;
+}
+
+.input-container-longe{
+    font-family: Comfortaa, sans-serif;
+    margin-left:25px;
+    text-align: left;
+    width:50%;
 }
 
 .input-container-long{
@@ -209,21 +258,7 @@ h1{
     transition: ease-in-out 0.2s;
 }
 
-.focused-note-off{
-    display:none;
-}
 
-.focused-note{
-    z-index: 100;
-    position: absolute;
-    backdrop-filter: blur(10px);
-    width: 50%;
-    height:50%;
-    margin-left: 25%;
-    background-color: #fff;
-    border-radius: 5px;
-    padding: 10px;
-}
 
 label {
 font-family: Comfortaa, sans-serif;
@@ -241,6 +276,15 @@ font-family: Comfortaa, sans-serif;
     margin-bottom: 10px;
     border: 1px solid #ccc;
     border-radius: 3px;
+}
+
+#comments_label{
+    margin-top:1%;
+}
+
+#note_back{
+    margin-left: 97.5%;
+    cursor: pointer;
 }
 
 #note{
@@ -287,3 +331,37 @@ a{
     margin-left: 10px;
     cursor: pointer;
 }
+
+  textarea {
+    width: 90%;
+    height: 80%;
+    padding: 10px;
+    margin-bottom: 16px;
+    box-sizing: border-box;
+    font-family: Comfortaa, sans-serif;
+  }
+
+  textarea {
+    resize: none;
+  }
+
+  button {
+    padding: 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+
+  button:hover {
+    background-color: #45a049;
+  }
+
+  #emaile{
+    width: 65%;
+  }
+
+  #email_label{
+    margin-top:5%;
+  }
