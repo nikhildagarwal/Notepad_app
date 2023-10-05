@@ -12,15 +12,15 @@
 <body>
     <div class="cover" id="edit_note">
         <div class="notes-edit-container">
-            <form class="notes-form-edit" method="POST" action="/create-note">
+            <form class="notes-form-edit" method="POST" action="/api/edit-note">
                 <i class="fa-solid fa-xmark" style="color: #2b2727;" id="note_back" title="cancel"></i>
-                <label for="email" id="email_label">Email:</label>
-                <input type="email" id="emaile" name="email" placeholder="Enter your email" required>
+                <label for="email" id="email_label">Title</label>
+                <input type="text" id="emaile" name="email" required>
+                <input type ="number" id="no_show" name ="message_id" required>
+                <label for="comments" id="comments_label">Note</label>
+                <textarea id="comments" name="comments" rows="7" required></textarea>
 
-                <label for="comments" id="comments_label">Comments:</label>
-                <textarea id="comments" name="comments" rows="7" placeholder="Enter your comments" required></textarea>
-
-                <button type="submit">Submit</button>
+                <button class="submit-btn" id="update-btn">Update</button>
             </form>
         </div>
     </div>
@@ -47,6 +47,7 @@
     <script>
         var MESSAGE = 2;
         var TITLE = 1;
+        var ID = 0;
 
         window.onload = ()=>{
             fetch('/api/fetch_notes',{
@@ -54,12 +55,20 @@
                 cache:"no-cache"
             }).then((response)=>{
                 response.json().then((result)=>{
+                    var map = new Map();
+                    
                     result.map((item)=>{
-                        document.getElementById("nc").innerHTML += `<div class="grid-item"><div class ="grid-item-title">${item[TITLE]}</div>${item[MESSAGE]}</div>`
+                        document.getElementById("nc").innerHTML += `<div class="grid-item" data-set="${item[ID]}"><div class ="grid-item-title">${item[TITLE]}</div>${item[MESSAGE]}</div>`
+                        map.set(item[ID],[item[TITLE],item[MESSAGE]])
                     })
                     document.querySelectorAll(".grid-item").forEach((button)=>{
                         button.addEventListener('click',()=>{
                             document.getElementById("edit_note").className = "cover_show";
+                            mid = Number(button.getAttribute("data-set"))
+                            message_data = map.get(mid);
+                            document.getElementById("comments").value = message_data[1];
+                            document.getElementById("emaile").value = message_data[0]; 
+                            document.getElementById("no_show").value = mid;
                         })
                     })
                 })

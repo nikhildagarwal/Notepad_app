@@ -1,6 +1,6 @@
 from flask import Flask, render_template, session, request, redirect, url_for
 from scripts import add_user, fetch_user, send_mail, check_user, update_user, create_note, fetch_notes, add_password
-from scripts import fetch_passwords
+from scripts import fetch_passwords, update_note
 
 app = Flask(__name__, template_folder='html')
 app.secret_key = 'fga738sfl8w9jJk824ISFafh0980h4tsg093ASFoiughasdg'
@@ -251,6 +251,19 @@ def get_notes():
 def get_passwords():
     fp = fetch_passwords.FetchPasswords(session['email'])
     return fp.rows
+
+
+@app.route('/api/edit-note', methods=['POST'])
+def edit_note():
+    try:
+        email = session['email']
+        title = request.form.get("email")
+        message = request.form.get("comments")
+        mid = request.form.get("message_id")
+        update_note.UpdateNote(mid,message,title)
+        return redirect(url_for('notes'))
+    except KeyError:
+        return redirect(url_for('login'))
 
 
 @app.route('/verify-access')

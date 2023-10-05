@@ -10,6 +10,6 @@ class UpdateNote:
                                 (user_id INTEGER PRIMARY KEY, name TEXT, email TEXT, password TEXT, phone TEXT)''')
         cursor.execute('''CREATE TABLE IF NOT EXISTS messages (message_id INTEGER PRIMARY KEY, message TEXT, 
                                 user_id INT, FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE)''')
-        cursor.execute("UPDATE messages, title SET message = ?, title = ? WHERE message_id = ?", (message, title, message_id))
+        cursor.execute("UPDATE messages SET message = ?, title = ? WHERE message_id = ?", (message, title, message_id))
         conn.commit()
         conn.close()
