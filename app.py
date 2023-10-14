@@ -308,6 +308,11 @@ def passwords(key):
 def encrypt_password():
     email = session['email']
     website = request.form.get('website')
+    if "://" in website:
+        split = website.split("://")
+        website = "https://" + split[1]
+    else:
+        website = "https://" + website
     user = request.form.get('user')
     password = request.form.get('password')
     ap = add_password.AddPassword(email, website, user, password)
