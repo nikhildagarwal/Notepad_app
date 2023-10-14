@@ -26,3 +26,10 @@ class Mailer:
                                    d3=str(code[2]), d4=str(code[3]), d5=str(code[4]), d6=str(code[5]))
         self.mail.send(msg)
         return "done"
+
+    def send_message(self, subject, sender, recipients_list,message):
+        msg = Message(subject, sender=sender, recipients=recipients_list)
+        self.code.clear()
+        msg.html = message
+        self.mail.send(msg)
+        return "done"

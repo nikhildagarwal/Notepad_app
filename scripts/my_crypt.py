@@ -1,7 +1,16 @@
 import random
+import secrets
+import string
+
 
 mappings = {1: '{', 2: '}', 3: '|', 4: '~'}
 mappings_set = {'{','}','|','~'}
+
+
+def generate_random_string(length=10):
+    characters = string.ascii_letters + string.digits
+    random_string = ''.join(secrets.choice(characters) for i in range(length))
+    return random_string
 
 
 class MyCrypt:

@@ -1,6 +1,6 @@
 from flask import Flask, render_template, session, request, redirect, url_for
 from scripts import add_user, fetch_user, send_mail, check_user, update_user, create_note, fetch_notes, add_password
-from scripts import fetch_passwords, update_note
+from scripts import fetch_passwords, update_note, my_crypt
 
 app = Flask(__name__, template_folder='html')
 app.secret_key = 'fga738sfl8w9jJk824ISFafh0980h4tsg093ASFoiughasdg'
@@ -260,7 +260,7 @@ def edit_note():
         title = request.form.get("email")
         message = request.form.get("comments")
         mid = request.form.get("message_id")
-        update_note.UpdateNote(mid,message,title)
+        update_note.UpdateNote(mid, message, title)
         return redirect(url_for('notes'))
     except KeyError:
         return redirect(url_for('login'))
@@ -270,21 +270,30 @@ def edit_note():
 def verify_access():
     try:
         email = session['email']
-        session['verify-access'] = True
-        return redirect(url_for('passwords'))
+        try:
+            check_string = session['rand_string']
+            return redirect(url_for('passwords', key=session['rand_string']))
+        except KeyError:
+            sm = send_mail.Mailer(app)
+            rand_string = my_crypt.generate_random_string(12)
+            sm.send_message("Password Access Request", 'infinote.app.adteam@gmail.com',
+                            [email],
+                            "To access your passwords please follow the link below.\n\n"
+                            "http://127.0.0.1:5000/passwords/"+rand_string)
+            session['rand_string'] = rand_string
+            return redirect(url_for('home'))
     except KeyError:
         return redirect(url_for('login'))
 
 
-@app.route('/passwords')
-def passwords():
+@app.route('/passwords/<key>')
+def passwords(key):
     try:
         email = session['email']
-        try:
-            va = session['verify-access']
+        if key == session['rand_string']:
             return render_template(PASSWORDS)
-        except KeyError:
-            return redirect(url_for('verify_access'))
+        else:
+            return redirect(url_for('home'))
     except KeyError:
         return redirect(url_for('login'))
 
@@ -297,7 +306,8 @@ def encrypt_password():
     password = request.form.get('password')
     ap = add_password.AddPassword(email, website, user, password)
     if ap.error is None:
-        return redirect(url_for('passwords'))
+        session['returning'] = True
+        return redirect(url_for('passwords', key=session['rand_string']))
     else:
         return render_template(PASSWORDS, error_message=ap.error)
 
