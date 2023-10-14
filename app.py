@@ -292,9 +292,13 @@ def verify_access():
 def passwords(key):
     try:
         email = session['email']
-        if key == session['rand_string']:
-            return render_template(PASSWORDS)
-        else:
+        try:
+            rs = session['rand_string']
+            if key == session['rand_string']:
+                return render_template(PASSWORDS)
+            else:
+                return redirect(url_for('home'))
+        except KeyError:
             return redirect(url_for('home'))
     except KeyError:
         return redirect(url_for('login'))
