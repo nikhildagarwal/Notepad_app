@@ -193,3 +193,10 @@ a {
     transition:0.3s ease-in-out;
     background-color: #f4f4f4;
 }
+
+#gif_image{
+    margin-left:15%;
+    border-radius:15px;
+    max-width:400px;
+    max-height:300px;
+}

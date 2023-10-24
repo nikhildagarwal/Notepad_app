@@ -21,6 +21,7 @@ CONFIRM_EMAIL = './email.html'
 RESET_PASSWORD = './double_password.html'
 NOTES = './notes.html'
 PASSWORDS = './passwords.html'
+PROFILE = './profile.html'
 
 
 @app.route('/')
@@ -272,18 +273,14 @@ def edit_note():
 def verify_access():
     try:
         email = session['email']
-        try:
-            check_string = session['rand_string']
-            return redirect(url_for('passwords', key=session['rand_string']))
-        except KeyError:
-            sm = send_mail.Mailer(app)
-            rand_string = my_crypt.generate_random_string(12)
-            sm.send_message("Password Access Request", 'infinote.app.adteam@gmail.com',
-                            [email],
-                            "To access your passwords please follow the link below.\n\n"
-                            "http://127.0.0.1:5000/passwords/"+rand_string)
-            session['rand_string'] = rand_string
-            return redirect(url_for('home'))
+        sm = send_mail.Mailer(app)
+        rand_string = my_crypt.generate_random_string(12)
+        sm.send_message("Password Access Request", 'infinote.app.adteam@gmail.com',
+                        [email],
+                        "To access your passwords please follow the link below.\n\n"
+                        "http://127.0.0.1:5000/passwords/" + rand_string)
+        session['rand_string'] = rand_string
+        return redirect(url_for('home'))
     except KeyError:
         return redirect(url_for('login'))
 
@@ -321,6 +318,15 @@ def encrypt_password():
         return redirect(url_for('passwords', key=session['rand_string']))
     else:
         return render_template(PASSWORDS, error_message=ap.error)
+
+
+@app.route('/profile')
+def profile():
+    try:
+        email = session['email']
+        return render_template(PROFILE, name=session['name'], email=email)
+    except KeyError:
+        return redirect(url_for('login'))
 
 
 if __name__ == "__main__":

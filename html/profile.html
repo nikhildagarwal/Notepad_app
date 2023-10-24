@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='after.css') }}">
+    <link rel="icon" href="{{ url_for('static', filename ='favicon.ico')}}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Profile</title>
+</head>
+<body>
+    <div class="container">
+        <div class="logo-title">
+
+
+            <div class = "welcome">
+                <img id="logo_image" src="../static/infinote_logo_trimmed.jpg" alt="A beautiful image">
+
+            </div>
+            <div class = "home-title">
+                <div class="txt">Profile<div class="sub-txt">- {{name}}</div><div class="sub-txt">- {{email}}</div></div>
+            </div>
+        </div>
+        <div class="directory">
+            <div class="welcome">
+                <p><a href="./home">Home</a></p>
+                <p><a href="./logout">Log Out</a></p>
+                <p id="help_button"><a href="./help">Help</a></p>
+            </div>
+            <img id="gif_image" src="../static/productivityflip2.gif" alt="A beautiful image">
+        </div>
+    </div>
+</body>
+</html>
