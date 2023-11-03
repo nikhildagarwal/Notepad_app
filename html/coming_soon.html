@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="{{ url_for('static', filename='sign_up.css') }}">
+<title>Coming Soon</title>
+<style>
+    @import url(https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;700&display=swap);
+
+    #logo_image{
+      cursor:pointer;
+    }
+
+  body, html {
+    margin-top:35px;
+    height: 400px;
+    font-family: Comfortaa, sans-serif;
+    display: flex;
+    justify-content: center;
+
+    text-align: center;
+    background: #f0f0f0; /* Single background color */
+  }
+
+  .content {
+    max-width: 600px;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  h1 {
+    font-size: 2.5em;
+    margin-bottom: 35px;
+    color: #333; /* Color for the heading text */
+  }
+
+  .countdown {
+    display: flex;
+    justify-content: center;
+  }
+
+  .countdown div {
+    margin: 0 10px;
+    text-align: center;
+  }
+
+  .number {
+    font-size: 3em;
+    color: #333; /* Color for the numbers */
+  }
+
+  .label {
+    font-size: 1em;
+    color: #666; /* Color for the labels */
+  }
+</style>
+</head>
+<body>
+
+<div class="content">
+  <img id="logo_image" src="../static/infinote_logo_trimmed.jpg" alt="A beautiful image">
+  <h1>Coming Soon</h1>
+  <div id="countdown" class="countdown">
+    <div>
+      <div class="number" id="days">00</div>
+      <div class="label">Days</div>
+    </div>
+    <div>
+      <div class="number" id="hours">00</div>
+      <div class="label">Hours</div>
+    </div>
+    <div>
+      <div class="number" id="minutes">00</div>
+      <div class="label">Minutes</div>
+    </div>
+    <div>
+      <div class="number" id="seconds">00</div>
+      <div class="label">Seconds</div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Set the date we're counting down to
+  var countDownDate = new Date("Jan 1, 2024 00:00:00").getTime();
+
+  // Update the count down every 1 second
+  var countdownfunction = setInterval(function() {
+    var now = new Date().getTime();
+    var distance = countDownDate - now;
+
+    // Time calculations for days, hours, minutes and seconds
+    var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+    // Output the result in an element with id="countdown"
+    document.getElementById("days").innerHTML = days < 10 ? '0' + days : days;
+    document.getElementById("hours").innerHTML = hours < 10 ? '0' + hours : hours;
+    document.getElementById("minutes").innerHTML = minutes < 10 ? '0' + minutes : minutes;
+    document.getElementById("seconds").innerHTML = seconds < 10 ? '0' + seconds : seconds;
+
+    // If the countdown is over, write some text
+    if (distance < 0) {
+      clearInterval(countdownfunction);
+      document.getElementById("countdown").innerHTML = "EXPIRED";
+    }
+  }, 1000);
+
+  document.getElementById("logo_image").addEventListener('click',()=>{
+    window.location.href = "./home";
+  })
+</script>
+
+</body>
+</html>

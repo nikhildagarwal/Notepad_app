@@ -22,11 +22,28 @@ RESET_PASSWORD = './double_password.html'
 NOTES = './notes.html'
 PASSWORDS = './passwords.html'
 PROFILE = './profile.html'
+COMING_SOON = './coming_soon.html'
+PASSWORD_LINK = './password_access_link.html'
 
 
 @app.route('/')
 def no_url():
     return redirect(url_for('home'))
+
+
+@app.route('/help')
+def help():
+    return render_template(COMING_SOON)
+
+
+@app.route('/trash')
+def trash():
+    return render_template(COMING_SOON)
+
+
+@app.route('/calendar')
+def calendar():
+    return render_template(COMING_SOON)
 
 
 @app.route('/home')
@@ -269,6 +286,11 @@ def edit_note():
         return redirect(url_for('login'))
 
 
+@app.route('/message')
+def message():
+    return render_template(PASSWORD_LINK)
+
+
 @app.route('/verify-access')
 def verify_access():
     try:
@@ -280,7 +302,7 @@ def verify_access():
                         "To access your passwords please follow the link below.\n\n"
                         "http://127.0.0.1:5000/passwords/" + rand_string)
         session['rand_string'] = rand_string
-        return redirect(url_for('home'))
+        return redirect(url_for('message'))
     except KeyError:
         return redirect(url_for('login'))
 
