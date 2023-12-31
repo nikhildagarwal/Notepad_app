@@ -2,7 +2,18 @@ from flask import Flask, render_template, session, request, redirect, url_for
 from scripts import add_user, fetch_user, send_mail, check_user, update_user, create_note, fetch_notes, add_password
 from scripts import fetch_passwords, update_note, my_crypt
 from datetime import timedelta
-import os
+import configparser
+
+
+def create_config():
+    config = configparser.ConfigParser()
+    config['DEFAULT'] = {'Server': '127.0.0.1',
+                         'Port': '5000'}
+    config['Settings'] = {'DebugMode': 'True',
+                          'LogFile': 'app.log'}
+    with open('config.ini', 'w') as configfile:
+        config.write(configfile)
+    return "Config.ini file has been created!"
 
 
 def create_app():
@@ -11,6 +22,7 @@ def create_app():
 
 
 app = create_app()
+create_config()
 app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(minutes=15)
 app.secret_key = 'fga738sfl8w9jJk824ISFafh0980h4tsg093ASFoiughasdg'
 EMAIL = fetch_user.EMAIL
@@ -360,4 +372,4 @@ def profile():
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(host="0.0.0.0", port=5000)
