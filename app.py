@@ -2,8 +2,15 @@ from flask import Flask, render_template, session, request, redirect, url_for
 from scripts import add_user, fetch_user, send_mail, check_user, update_user, create_note, fetch_notes, add_password
 from scripts import fetch_passwords, update_note, my_crypt
 from datetime import timedelta
+import os
 
-app = Flask(__name__, template_folder='html')
+
+def create_app():
+    ap = Flask(__name__, template_folder='html')
+    return ap
+
+
+app = create_app()
 app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(minutes=15)
 app.secret_key = 'fga738sfl8w9jJk824ISFafh0980h4tsg093ASFoiughasdg'
 EMAIL = fetch_user.EMAIL
@@ -297,10 +304,11 @@ def verify_access():
         email = session['email']
         sm = send_mail.Mailer(app)
         rand_string = my_crypt.generate_random_string(12)
+        app_root = request.url_root
         sm.send_message("Password Access Request", 'infinote.app.adteam@gmail.com',
                         [email],
-                        "To access your passwords please follow the link below.\n\n"
-                        "http://127.0.0.1:5000/passwords/" + rand_string)
+                        "To access your passwords please follow the link below.\n\n" +
+                        app_root + "/passwords/" + rand_string)
         session['rand_string'] = rand_string
         return redirect(url_for('message'))
     except KeyError:
