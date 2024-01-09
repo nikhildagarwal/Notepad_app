@@ -19,6 +19,7 @@ body {
 }
 
 .container {
+font-family: Comfortaa, sans-serif;
     display:flex;
     flex-direction:column;
     justify-contents:center;
@@ -35,6 +36,7 @@ body {
 }
 
 .logo-title{
+font-family: Comfortaa, sans-serif;
     display:flex;
     justify-contents:center;
     flex-direction:row;
@@ -47,6 +49,7 @@ body {
 }
 
 .directory{
+font-family: Comfortaa, sans-serif;
     display:flex;
     height:auto;
     margin-top:15px;
@@ -56,6 +59,7 @@ body {
 }
 
 .welcome{
+font-family: Comfortaa, sans-serif;
     width:15%;
     height:100px;
     background-color:#fff;
@@ -63,6 +67,7 @@ body {
 }
 
 .buttons{
+font-family: Comfortaa, sans-serif;
     display:flex;
     flex-direction:rows;
     width:70%;
@@ -74,18 +79,21 @@ body {
 }
 
 .txt{
+font-family: Comfortaa, sans-serif;
     font-weight:bold;
     color:#434343;
     font-size:30px;
 }
 
 .sub-txt{
+font-family: Comfortaa, sans-serif;
     margin-top:10px;
     color:#434343;
     font-size:15px;
 }
 
 .home-title{
+font-family: Comfortaa, sans-serif;
     display:flex;
     flex-direction:column;
     width:70%;
@@ -95,14 +103,17 @@ body {
 }
 
 .signup-form {
+font-family: Comfortaa, sans-serif;
     text-align: center;
 }
 
 .login-form{
+font-family: Comfortaa, sans-serif;
     text-align: center;
 }
 
 h2 {
+font-family: Comfortaa, sans-serif;
     color: #333;
 }
 
@@ -131,6 +142,7 @@ font-family: Comfortaa, sans-serif;
 }
 
 .submit-btn {
+font-family: Comfortaa, sans-serif;
     background-color: #333;
     color: #fff;
     border: none;
@@ -138,29 +150,32 @@ font-family: Comfortaa, sans-serif;
     border-radius: 3px;
     cursor: pointer;
     transition: ease-in-out 0.2s;
-    font-family: Comfortaa, sans-serif;
 }
 
 .submit-btn:hover {
     background-color: #5b05cc;
     transition: ease-in-out 0.2s;
+    font-family: Comfortaa, sans-serif;
 }
 
 p {
     margin-left:22px;
     margin-top: 6px;
     font-size: 14px;
+    font-family: Comfortaa, sans-serif;
 }
 
 #help_button{
     margin-left:22px;
     margin-top: 33px;
     font-size: 14px;
+    font-family: Comfortaa, sans-serif;
 }
 
 a {
     color: #333;
     text-decoration: none;
+    font-family: Comfortaa, sans-serif;
 }
 
 #notepad-icon{
