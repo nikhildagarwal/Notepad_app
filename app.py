@@ -2,6 +2,12 @@ from flask import Flask, render_template, session, request, redirect, url_for
 from scripts import add_user, fetch_user, send_mail, check_user, update_user, create_note, fetch_notes, add_password
 from scripts import fetch_passwords, update_note, my_crypt
 from datetime import timedelta
+from dotenv import load_dotenv
+from flask_cors import CORS
+import os
+
+load_dotenv()
+
 
 def create_app():
     ap = Flask(__name__, template_folder='html')
@@ -9,6 +15,8 @@ def create_app():
 
 
 app = create_app()
+CORS(app)
+app.config['DEBUG'] = os.environ.get('FLASK_DEBUG')
 app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(minutes=15)
 app.secret_key = 'fga738sfl8w9jJk824ISFafh0980h4tsg093ASFoiughasdg'
 EMAIL = fetch_user.EMAIL
@@ -358,4 +366,4 @@ def profile():
 
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000)
+    app.run()
