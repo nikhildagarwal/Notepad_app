@@ -4,8 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{ url_for('static', filename='sign_up.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='help.css') }}">
     <link rel="icon" href="{{ url_for('static', filename ='favicon.ico')}}">
-    <title>Message</title>
+    <title>Thanks</title>
     <style>
         #logo_image{
             cursor:pointer;
@@ -14,16 +15,20 @@
 </head>
 <body>
     <div class="container">
-        <form class="signup-form">
+        <form class="signup-form" action="./home">
             <img id="logo_image" src="../static/infinote_logo_trimmed.jpg" alt="A beautiful image">
-            <h2>Not So Fast</h2>
-            <div id="thanks" class="text">
-                We just sent a password access link to your email. You can access your passwords via the provided link.
-                </br></br>Best,</br>The Infinote Team
+            <h2>Thanks</h2>
+            <div id="thanks-note" class="text">
+                Your message has been sent and is being reviewed by our team. We will be in touch with the next steps.
+                </br></br> Best,</br> The Infinote Team
             </div>
+            <p>&nbsp;</p>
+            <a href="./home">
+                <button id="thanks-button">Return</button>
+            </a>
         </form>
-
     </div>
+
     <script>
         document.getElementById("logo_image").addEventListener('click',()=>{
     window.location.href = "./home";

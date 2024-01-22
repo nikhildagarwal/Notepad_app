@@ -4,6 +4,7 @@ from scripts import fetch_passwords, update_note, my_crypt
 from datetime import timedelta
 from dotenv import load_dotenv
 from flask_cors import CORS
+from flask_cors import CORS
 import os
 
 load_dotenv()
@@ -37,6 +38,8 @@ PASSWORDS = './passwords.html'
 PROFILE = './profile.html'
 COMING_SOON = './coming_soon.html'
 PASSWORD_LINK = './password_access_link.html'
+HELP = './help.html'
+THANKS = './thanks.html'
 
 
 @app.route('/')
@@ -44,9 +47,29 @@ def no_url():
     return redirect(url_for('home'))
 
 
+@app.route('/thanks')
+def thanks():
+    return render_template(THANKS)
+
+
 @app.route('/help')
 def help():
-    return render_template(COMING_SOON)
+    try:
+        name = session['name']
+        email = session['email']
+        return render_template(HELP, name=name, email=email)
+    except KeyError:
+        return render_template(HELP, name="", email="")
+
+
+@app.route('/send-help', methods=["POST"])
+def send_help():
+    name = request.form.get('name')
+    email = request.form.get('email')
+    m = request.form.get('message')
+    sm = send_mail.Mailer(app)
+    sm.send_issue_message(name, email, m)
+    return "done"
 
 
 @app.route('/trash')

@@ -55,6 +55,11 @@ font-family: Comfortaa, sans-serif;
     margin-bottom: 5px;
 }
 
+#thanks-note{
+    text-align:left;
+    line-height:20px;
+}
+
 input[type="text"],
 input[type="email"],
 input[type="password"] {

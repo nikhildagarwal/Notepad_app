@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='help.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='sign_up.css') }}">
+    <link rel="icon" href="{{ url_for('static', filename ='favicon.ico')}}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Home</title>
+</head>
+<body>
+    <div class="contact-form-container">
+        <form action="./send-help" method="POST">
+            <img id="logo_image" src="../static/infinote_logo_trimmed.jpg" alt="A beautiful image">
+            <h2>Contact Us</h2>
+            <div class="input-group">
+                <label for="name">Name - </label>
+                <input type="text" id="name" name="name" value="{{name}}" required>
+            </div>
+            <div class="input-group">
+                <label for="email">Email - </label>
+                <input type="email" id="email" name="email" value="{{email}}" required>
+            </div>
+            <div class="input-group">
+                <label for="message">Message - </label>
+                <textarea id="message" name="message" required></textarea>
+            </div>
+            <button type="submit">Send Message</button>
+        </form>
+    </div>
+    <script>
+        document.getElementById("logo_image").addEventListener('click',()=>{
+            window.location.href="./home";
+        })
+    </script>
+</body>
+</html>
