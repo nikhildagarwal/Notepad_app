@@ -1,10 +1,12 @@
 from flask_mail import Mail, Message
 from flask import render_template
-from app import VC
 import random
+
+VC = "./verification_code.html"
 
 
 class Mailer:
+
     def __init__(self, app):
         app.config['MAIL_SERVER'] = 'smtp.gmail.com'
         app.config['MAIL_PORT'] = 587
@@ -22,7 +24,7 @@ class Mailer:
             self.code.append(random.randint(0, 9))
         code = self.code
         msg.html = str(render_template(VC, email_msg=message, d1=str(code[0]), d2=str(code[1]),
-                                   d3=str(code[2]), d4=str(code[3]), d5=str(code[4]), d6=str(code[5])))
+                                       d3=str(code[2]), d4=str(code[3]), d5=str(code[4]), d6=str(code[5])))
         self.mail.send(msg)
         return "done"
 
