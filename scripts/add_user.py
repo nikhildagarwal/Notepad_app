@@ -1,5 +1,4 @@
 import sqlite3
-
 from scripts import my_crypt
 
 

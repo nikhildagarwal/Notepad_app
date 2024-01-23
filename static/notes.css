@@ -141,7 +141,7 @@ h2{
     align-items: center;
     flex-direction: row;
     margin-left: -5%;
-    width: 110%;
+    max-width:110%;
 }
 
 .password-item .password {
@@ -256,6 +256,23 @@ h1{
     transition: ease-in-out 0.2s;
 }
 
+.submit-btn-round {
+    background-color: #333;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: ease-in-out 0.2s;
+    font-family: Comfortaa, sans-serif;
+    margin-left:50px;
+    margin-top:12.5px;
+}
+
+.submit-btn-round:hover{
+    background-color: #5b05cc;
+    transition: ease-in-out 0.2s;
+}
 
 
 label {
@@ -369,6 +386,24 @@ a{
     margin-left:-0.05%;
 }
 
+#delete-btn{
+    margin-top:0.5rem;
+    margin-left:-0.05%;
+}
+
 #no_show{
     display: none;
+}
+
+
+#no_show_1{
+    display: none;
+}
+
+.trash-form{
+    align-self:center;
+    justify-self:center;
+    text-align:center;
+    margin-left:20%;
+    margin-top:-0.5%;
 }

@@ -1,9 +1,8 @@
 from flask import Flask, render_template, session, request, redirect, url_for
 from scripts import add_user, fetch_user, send_mail, check_user, update_user, create_note, fetch_notes, add_password
-from scripts import fetch_passwords, update_note, my_crypt
+from scripts import fetch_passwords, update_note, my_crypt, delete_note, delete_password
 from datetime import timedelta
 from dotenv import load_dotenv
-from flask_cors import CORS
 from flask_cors import CORS
 import os
 
@@ -315,10 +314,32 @@ def edit_note():
     try:
         email = session['email']
         title = request.form.get("email")
-        message = request.form.get("comments")
+        m = request.form.get("comments")
         mid = request.form.get("message_id")
-        update_note.UpdateNote(mid, message, title)
+        update_note.UpdateNote(mid, m, title)
         return redirect(url_for('notes'))
+    except KeyError:
+        return redirect(url_for('login'))
+
+
+@app.route('/api/delete-note', methods=['POST'])
+def note_deleter():
+    try:
+        email = session['email']
+        message_id = request.form.get("message_id")
+        delete_note.DeleteNote(email, message_id)
+        return redirect(url_for('notes'))
+    except KeyError:
+        return redirect(url_for('login'))
+
+
+@app.route('/passwords/api/delete-password', methods=["POST"])
+def password_deleter():
+    try:
+        email = session['email']
+        password_id = request.form.get("password_id")
+        delete_password.DeletePassword(email, password_id)
+        return redirect(url_for('passwords', key=session['rand_string']))
     except KeyError:
         return redirect(url_for('login'))
 
@@ -338,7 +359,7 @@ def verify_access():
         sm.send_message("Password Access Request", 'infinote.app.adteam@gmail.com',
                         [email],
                         "To access your passwords please follow the link below.\n\n" +
-                        app_root + "/passwords/" + rand_string)
+                        app_root + "passwords/" + rand_string)
         session['rand_string'] = rand_string
         return redirect(url_for('message'))
     except KeyError:

@@ -19,8 +19,11 @@
                 <input type ="number" id="no_show" name ="message_id" required>
                 <label for="comments" id="comments_label">Note</label>
                 <textarea id="comments" name="comments" rows="7" required></textarea>
-
                 <button class="submit-btn" id="update-btn">Update</button>
+            </form>
+            <form class="notes-form-edit" method="POST" action="/api/delete-note">
+                <input type ="number" id="no_show_1" name="message_id" required>
+                <button class="submit-btn" id="delete-btn">Delete</button>
             </form>
         </div>
     </div>
@@ -69,6 +72,7 @@
                             document.getElementById("comments").value = message_data[1];
                             document.getElementById("emaile").value = message_data[0]; 
                             document.getElementById("no_show").value = mid;
+                            document.getElementById("no_show_1").value = mid;
                         })
                     })
                 })
