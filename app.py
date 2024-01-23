@@ -40,6 +40,7 @@ COMING_SOON = './coming_soon.html'
 PASSWORD_LINK = './password_access_link.html'
 HELP = './help.html'
 THANKS = './thanks.html'
+VC = './verification_code.html'
 
 
 @app.route('/')
