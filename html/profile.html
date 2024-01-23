@@ -28,7 +28,16 @@
                 <p id="help_button"><a href="./help">Help</a></p>
             </div>
             <img id="gif_image" src="../static/productivityflip2.gif" alt="A beautiful image">
+
         </div>
+        <div class="bad-message" id="delete-account-btn">
+                Delete Account
+            </div>
     </div>
+<script>
+    document.getElementById('delete-account-btn').addEventListener('click',()=>{
+        window.location.href = "./account/delete";
+    })
+</script>
 </body>
 </html>

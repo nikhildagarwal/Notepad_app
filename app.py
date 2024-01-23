@@ -72,6 +72,11 @@ def send_help():
     return "done"
 
 
+@app.route('/account/delete')
+def account_deleter():
+    return render_template(COMING_SOON)
+
+
 @app.route('/trash')
 def trash():
     return render_template(COMING_SOON)

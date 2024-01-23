@@ -8,6 +8,20 @@ body {
     max-height:100%;
 }
 
+p:hover{
+    text-decoration:underline;
+}
+
+.bad-message{
+    margin-top:5%;
+    color:#eb272a;
+    cursor:pointer;
+}
+
+.bad-message:hover{
+    text-decoration:underline;
+}
+
 #logo_image{
     max-height:110px;
     max-width:110px;
