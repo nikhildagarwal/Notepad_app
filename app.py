@@ -68,7 +68,7 @@ def send_help():
     m = request.form.get('message')
     sm = send_mail.Mailer(app)
     sm.send_issue_message(name, email, m)
-    return "done"
+    return redirect(url_for('thanks'))
 
 
 @app.route('/account/delete')
